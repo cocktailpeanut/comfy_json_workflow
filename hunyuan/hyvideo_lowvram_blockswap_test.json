@@ -1,0 +1,443 @@
+{
+  "last_node_id": 35,
+  "last_link_id": 43,
+  "nodes": [
+    {
+      "id": 30,
+      "type": "HyVideoTextEncode",
+      "pos": [
+        203,
+        247
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_encoders",
+          "type": "HYVIDTEXTENCODER",
+          "link": 35
+        }
+      ],
+      "outputs": [
+        {
+          "name": "hyvid_embeds",
+          "type": "HYVIDEMBEDS",
+          "links": [
+            36
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HyVideoTextEncode"
+      },
+      "widgets_values": [
+        "high quality anime style movie featuring a wolf in a forest",
+        "bad quality video"
+      ]
+    },
+    {
+      "id": 16,
+      "type": "DownloadAndLoadHyVideoTextEncoder",
+      "pos": [
+        -310,
+        248
+      ],
+      "size": [
+        441,
+        106
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "hyvid_text_encoder",
+          "type": "HYVIDTEXTENCODER",
+          "links": [
+            35
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DownloadAndLoadHyVideoTextEncoder"
+      },
+      "widgets_values": [
+        "Kijai/llava-llama-3-8b-text-encoder-tokenizer",
+        "openai/clip-vit-large-patch14",
+        "fp16"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "HyVideoVAELoader",
+      "pos": [
+        442,
+        -282
+      ],
+      "size": [
+        379.166748046875,
+        82
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "compile_args",
+          "type": "COMPILEARGS",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": [
+            6
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HyVideoVAELoader"
+      },
+      "widgets_values": [
+        "hunyuan_video_vae_bf16.safetensors",
+        "fp16"
+      ]
+    },
+    {
+      "id": 1,
+      "type": "HyVideoModelLoader",
+      "pos": [
+        24,
+        -63
+      ],
+      "size": [
+        509.7506103515625,
+        178
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "compile_args",
+          "type": "COMPILEARGS",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "block_swap_args",
+          "type": "BLOCKSWAPARGS",
+          "link": 43,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "HYVIDEOMODEL",
+          "links": [
+            2
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HyVideoModelLoader"
+      },
+      "widgets_values": [
+        "hunyuan_video_720_fp8_e4m3fn.safetensors",
+        "bf16",
+        "fp8_e4m3fn",
+        "offload_device",
+        "sdpa"
+      ]
+    },
+    {
+      "id": 35,
+      "type": "HyVideoBlockSwap",
+      "pos": [
+        -351,
+        -44
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "block_swap_args",
+          "type": "BLOCKSWAPARGS",
+          "links": [
+            43
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HyVideoBlockSwap"
+      },
+      "widgets_values": [
+        20,
+        0
+      ]
+    },
+    {
+      "id": 34,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        1367,
+        -275
+      ],
+      "size": [
+        371.7926940917969,
+        310
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 42
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 16,
+        "loop_count": 0,
+        "filename_prefix": "HunyuanVideo",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": false,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "HunyuanVideo_00059.mp4",
+            "subfolder": "",
+            "type": "temp",
+            "format": "video/h264-mp4",
+            "frame_rate": 16
+          },
+          "muted": false
+        }
+      }
+    },
+    {
+      "id": 5,
+      "type": "HyVideoDecode",
+      "pos": [
+        920,
+        -279
+      ],
+      "size": [
+        345.4285888671875,
+        102
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 6
+        },
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            42
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HyVideoDecode"
+      },
+      "widgets_values": [
+        true,
+        8
+      ]
+    },
+    {
+      "id": 3,
+      "type": "HyVideoSampler",
+      "pos": [
+        668,
+        -62
+      ],
+      "size": [
+        315,
+        314
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "HYVIDEOMODEL",
+          "link": 2
+        },
+        {
+          "name": "hyvid_embeds",
+          "type": "HYVIDEMBEDS",
+          "link": 36
+        },
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "links": [
+            4
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HyVideoSampler"
+      },
+      "widgets_values": [
+        512,
+        512,
+        33,
+        20,
+        6,
+        9,
+        2,
+        "fixed",
+        1,
+        1
+      ]
+    }
+  ],
+  "links": [
+    [
+      2,
+      1,
+      0,
+      3,
+      0,
+      "HYVIDEOMODEL"
+    ],
+    [
+      4,
+      3,
+      0,
+      5,
+      1,
+      "LATENT"
+    ],
+    [
+      6,
+      7,
+      0,
+      5,
+      0,
+      "VAE"
+    ],
+    [
+      35,
+      16,
+      0,
+      30,
+      0,
+      "HYVIDTEXTENCODER"
+    ],
+    [
+      36,
+      30,
+      0,
+      3,
+      1,
+      "HYVIDEMBEDS"
+    ],
+    [
+      42,
+      5,
+      0,
+      34,
+      0,
+      "IMAGE"
+    ],
+    [
+      43,
+      35,
+      0,
+      1,
+      1,
+      "BLOCKSWAPARGS"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9090909090909091,
+      "offset": [
+        799.6119664395361,
+        503.44341993174794
+      ]
+    }
+  },
+  "version": 0.4
+}
