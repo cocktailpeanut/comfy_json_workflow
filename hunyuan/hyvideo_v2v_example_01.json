@@ -668,7 +668,7 @@
         "Node name for S&R": "HyVideoModelLoader"
       },
       "widgets_values": [
-        "hunyuan_video_720_fp8_e4m3fn.safetensors",
+        "hunyuan_video_720_cfgdistill_fp8_e4m3fn.safetensors",
         "bf16",
         "fp8_e4m3fn",
         "offload_device",
