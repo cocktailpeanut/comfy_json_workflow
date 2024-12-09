@@ -232,8 +232,8 @@
         "hunyuan_video_720_cfgdistill_fp8_e4m3fn.safetensors",
         "bf16",
         "fp8_e4m3fn_fast",
-        "main_device",
-        "sageattn_varlen"
+        "offload_device",
+        "sdpa"
       ]
     },
     {
