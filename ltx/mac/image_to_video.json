@@ -32,7 +32,7 @@
         "Node name for S&R": "CLIPLoader"
       },
       "widgets_values": [
-        "t5xxl_fp8_e4m3fn_scaled.safetensors",
+        "t5xxl_fp16.safetensors",
         "ltxv",
         "default"
       ]
